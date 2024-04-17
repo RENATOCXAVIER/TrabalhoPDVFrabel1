@@ -1,0 +1,42 @@
+
+
+
+
+
+CREATE TABLE tb_cliente(
+  id_cliente SERIAL PRIMARY KEY,
+  nome VARCHAR(100),
+  telefone VARCHAR(9),
+  cpf VARCHAR(11)
+  
+
+);
+
+CREATE tb_produto(
+ id_produto SERIAL PRIMARY KEY,
+ descricao VARCHAR(100)
+);
+
+CREATE TABLE tb_venda(
+ id_venda SERIAL PRIMARY KEY,
+ id_cliente INT NOT NULL,
+ valor_total DOUBLE,
+ desconto_total DOUBLE,
+ qtd_total_itens INT,
+ 
+ FOREIGN KEY(id_cliente) REFERENCES tb_cliente(id_cliente)
+);
+CREATE TABLE tb_item_venda(
+ id SERIAL PRIMARY KEY,
+ id_produto INT NOT NULL,
+ id_venda INT NOT NULL,
+ descricao VARCHAR(100),
+ qtd INT,
+ vlr_unit DOUBLE,
+ vlr_total DOUBLE,
+ desconto_un DOUBLE,
+	
+ FOREIGN KEY(id_produto) REFERENCES tb_produto(id_produto),
+ FOREIGN KEY(id_venda) REFERENCES tb_venda(id_venda)	
+	
+);
